@@ -1,3 +1,4 @@
+# This script receives and processes the data that the NODEMCU module (that has the MQ6 gas leak sensor attached to it) sends via MQTT protocol
 import paho.mqtt.client as mqtt
 from twilio.rest import Client
 import time
@@ -7,6 +8,7 @@ GPIO.setwarnings(False)
 
 
 def on_connect(client, userdata, flags, rc):  
+    #Mqtt Topic
     client.subscribe("esp/tes")
 
  
@@ -19,19 +21,20 @@ def on_message(client, userdata, msg):
         
 
         from twilio.rest import Client
-        
+        #initiating call via Twilio web service
         account_sid = "ACf6e9b7ca6a43c5436d05fa8de1a84817"
         auth_token = "6947b59c0b9b521089487c499acf8681"
         client = Client(account_sid, auth_token)
         print "calling....."
         
         call = client.calls.create(
-        to="+919837311207",
-        from_="+17206051065",
+        to="The number to be called",
+        from_="Your Twilio number",
         url="http://demo.twilio.com/docs/voice.xml"
         )
         print("Switching on exhaust")
         i=1
+        # switching On the Realy module to which the exhaust fan is attached
         while i<100:
             GPIO.setmode(GPIO.BCM)
             GPIO.setup(4,GPIO.OUT)
@@ -66,8 +69,8 @@ def on_message(client, userdata, msg):
 client = mqtt.Client()
 client.on_connect = on_connect
 client.on_message = on_message
- 
-client.connect("192.168.1.102", 1883, 60)
+
+client.connect("The IP of the raspberry Pi,on which the MQtt server is running  ", 1883, 60)
  
 client.loop_forever()
 GPIO.cleanup();
