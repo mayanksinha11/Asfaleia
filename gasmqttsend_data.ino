@@ -1,9 +1,10 @@
+//This code is to be uploaded on the NodeMCU WIFI module, the input of the MQ6 Gas Leak sensor is on the D0 pin//
 #include <ESP8266WiFi.h>
 #include <PubSubClient.h>
  
-const char* ssid = "TP-LINK_4E0C";
-const char* password =  "maxblaze007";
-const char* mqttServer = "192.168.1.102";
+const char* ssid = "Your SSID";
+const char* password =  "Your password";
+const char* mqttServer = "IP of the raspberry pi, whch is the MQTT server";
 const int mqttPort = 1883;
 const char* mqttUser = "";
 const char* mqttPassword = "";
@@ -45,7 +46,6 @@ void setup() {
  if (digitalRead(16) == HIGH) {
   client.publish("esp/tes", "1");
   client.subscribe("esp/tes");
-  digitalWrite(2,HIGH);
   delay(1000);
   }
   else{
