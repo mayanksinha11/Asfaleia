@@ -20,9 +20,13 @@ client = Client(account_sid, auth_token)
 
 GPIO.setwarnings(False)
 GPIO.setmode(GPIO.BCM)
+# setting up output for the buzzer
 GPIO.setup(17,GPIO.OUT)
+# setting up input from the PIR sensor
 GPIO.setup(18,GPIO.IN)
+#setting up input from the face recognition script
 GPIO.setup(24,GPIO.IN)
+#setting up input from fingerprint sensor module
 GPIO.setup(21,GPIO.IN)
 
 try:
@@ -31,6 +35,7 @@ try:
     time.sleep(0.2)
     GPIO.output(17,GPIO.LOW)
     while True:
+        # condition of authentication from both th fingerprint sensor module and the face recognition module
         if GPIO.input(21) and GPIO.input(24):
             GPIO.output(17,GPIO.HIGH)
             time.sleep(0.2)
@@ -41,6 +46,7 @@ try:
             GPIO.output(17,GPIO.LOW)    
             print("Hello user, the system is halted for 30 seconds")
             time.sleep(30)
+            # conditon for the PIR motion sensor 
         if GPIO.input(18):
             print("Motion detected, clicking picture")
             import pygame.camera
@@ -54,15 +60,16 @@ try:
             print("Calling and sending an email")
             # Start a phone call
             call = client.calls.create(
-            to="+919837311207",
-            from_="+18722013290",
+            to="the number on which you want to call",
+            from_="your number as alloted to you by the Twilio web service",
             url="http://demo.twilio.com/docs/voice.xml"
             )
             print("Firing Alarm")
             i=1
             print(call.sid)
-            email_user = 'mayank.sinhacs14@gmail.com'
-            email_send = 'mayanksinha15@gmail.com'
+            #smtp to send the photo clicked of the intruder to the user via mail
+            email_user = 'User email address'
+            email_send = 'receiver email address'
             subject =' Motion detected intruder alert- see the attached image'
             msg = MIMEMultipart()
             msg['From'] = email_user
@@ -81,10 +88,11 @@ try:
             text =msg.as_string()
             server =smtplib.SMTP('smtp.gmail.com',587)
             server.starttls()
-            server.login(email_user,'max blaze007')
+            server.login(email_user,'User email password')
             server.sendmail(email_user,email_send,text)
             server.quit
             print("Email sent")
+            #firing alarm via the piezo buzzer
             while i<6:
                 GPIO.output(17,GPIO.HIGH)
                 time.sleep(0.2)
