@@ -49,9 +49,9 @@ if __name__ == '__main__':
 					confidence)
 				if label == config.POSITIVE_LABEL and confidence < config.POSITIVE_THRESHOLD:
 					print 'Recognized face!'
-					GPIO.output(23,GPIO.HIGH)
+					GPIO.output(24,GPIO.HIGH)
 					time.sleep(10)
-					GPIO.output(23,GPIO.LOW)
+					GPIO.output(24,GPIO.LOW)
 					break
 					
 				else:
