@@ -19,5 +19,5 @@ irmqttsenddata.ino, irmqttdatareceivescript.py- Scripts to wirelessly send and r
 gasmqttrecievescript.py, gasmqttsend_data.ino- Scripts to wirelessly send and receive sensor data between NODEMCU(MQ6 gas leak sensor attached to it) and the Raspberry Pi.
 
 Notifying the user:
-1-by email-via SMTP
-2-by Call- via web service
+1-by email- SMTP
+2-by Call-  web service
