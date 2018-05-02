@@ -1,9 +1,10 @@
+//This code is to be uploaded on the NodeMCU WIFI module, the input of the IR beam Break sensor is on the D0 pin//
 #include <ESP8266WiFi.h>
 #include <PubSubClient.h>
  
-const char* ssid = "TP-LINK_4E0C";
-const char* password =  "maxblaze007";
-const char* mqttServer = "192.168.1.102";
+const char* ssid = "Your SSID";
+const char* password =  "Your password";
+const char* mqttServer = "IP of the Raspberrry pi, which is the MQTT server";
 const int mqttPort = 1883;
 const char* mqttUser = "";
 const char* mqttPassword = "";
