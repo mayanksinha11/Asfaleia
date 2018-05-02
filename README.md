@@ -14,3 +14,10 @@ The check_fingerprint.ino script is used to set an GPIO pin to high (when a regi
 Intsuion detection:
 Motion1.py- script for the PIR sensor which clicks the image of the intruder and sends via an email to the user, and also makes a call on the user's cellphone.
 
+irmqttsenddata.ino, irmqttdatareceivescript.py- Scripts to wirelessly send and receive sensor data between NODEMCU(IR breakbeam sensor attached to it) and the Raspberry Pi.
+
+gasmqttrecievescript.py, gasmqttsend_data.ino- Scripts to wirelessly send and receive sensor data between NODEMCU(MQ6 gas leak sensor attached to it) and the Raspberry Pi.
+
+Notifying the user:
+1-by email-via SMTP
+2-by Call- via web service
